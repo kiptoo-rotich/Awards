@@ -37,18 +37,10 @@ class ProfileUpdateForm(forms.ModelForm):
         fields=['profile_pic','bio']
         
 class ProjectForm(forms.ModelForm):
-    language=forms.MultipleChoiceField(
-        required=False,
-        widget=forms.CheckboxSelectMultiple,
-        choices=languages
-    )
-    
-    technologies=forms.MultipleChoiceField(
-        required=False,
-        widget=forms.CheckboxSelectMultiple,
-        choices=technologies
-    )
-    
+ 
     class Meta:
         model=Projects
-        fields=['project_title','project_about','project_description','screen_shot','technologies','language']
+        fields='__all__'
+        widget={
+            'technologies':forms.CheckboxSelectMultiple()
+        }
