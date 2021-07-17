@@ -2,10 +2,12 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import (REDIRECT_FIELD_NAME, get_user_model, login as auth_login,logout as auth_logout, update_session_auth_hash)
 from .forms import ProfileUpdateForm,ProjectForm
 from django.contrib.sites.shortcuts import get_current_site
+from .models import Projects
 
 
 def index(request):
-    return render(request,'main/index.html')
+    projects=Projects.objects.all()
+    return render(request,'main/index.html',{"projects":projects})
 
 def registration(request):
     if request.method == 'POST':
@@ -72,6 +74,15 @@ def profile(request):
     return render(request, 'main/profile.html',context)
 
 def newProject(request):
+    user=request.user
     form=ProjectForm()
-    context={"form":form}
+    if request.method=="POST":
+        form=ProjectForm(request.POST,request.FILES)
+        if form.is_valid():
+            project=form.save(commit=False)
+            project.save()
+        return redirect('index')
+    else:
+        form=ProjectForm()
+        context={"form":form}
     return render(request,'main/project.html',context)
