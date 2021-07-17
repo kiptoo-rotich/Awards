@@ -2,5 +2,13 @@
 {%load bootstrap3%}
 {%block content%}
 {{block.super}}
+<div class="container">
+    <div class="row">
+        {%for project in projects%}
+        {{project.project_description}}
+        {%endfor%}
+    </div>
+</div>
+
 
 {%endblock%}
