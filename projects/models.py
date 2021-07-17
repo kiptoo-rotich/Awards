@@ -22,3 +22,7 @@ class Projects(models.Model):
     screen_shot=models.ImageField(upload_to='images/', default="Image")
     technologies=models.CharField(max_length=20)
 
+    @classmethod
+    def search(cls,search_term):
+        projects=cls.objects.filter(project_title__icontains=search_term)
+        return projects

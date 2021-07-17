@@ -93,3 +93,14 @@ def newProject(request):
         form=ProjectForm()
         context={"form":form}
     return render(request,'main/project.html', context)
+
+def search_results(request):
+    if 'Project' in request.GET and request.GET["Project"]:
+        search_term=request.GET.get('Project')
+        searched_results=Projects.search(search_term)
+        message=f"{search_term}"
+        
+        return render(request,"main/search.html",{"message":message,"results": searched_results})
+    else:
+        message="You haven't searched for any term"
+        return render(request,"main/search.html",{"message":message})

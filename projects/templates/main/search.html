@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="container">
+    <div class="row">
+        {%if results%}
+        <h2>Found {{results|length}} of searched term {{message}}</h2>
+        {%else%}
+        <h2>Found 0 results for searched term {{message}}</h2>
+        {%endif%}
+    </div>
+
+    <div class="row">
+        {%if results%}
+        {%for result in results%}
+        <div class="col-sm-6 col-md-3">
+            <h1>{{result.project_title}}</h1>
+        </div>
+        {%endfor%}
+        {%endif%}
+    </div>
+</div>
+{%endblock%}
