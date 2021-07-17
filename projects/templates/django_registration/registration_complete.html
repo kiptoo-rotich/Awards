@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{%load bootstrap3%}
+{%load static%}
+{%block content%}
+<div>
+
+    <div class="container">
+        <div class="row">
+            <!-- Empty div -->
+            <div class="col-md-4"></div>
+            <div class="col-sm-4 col-md-4 col-lg-4 success">
+                <h3>Account created successfully!</h3>
+                <h5>You need to <em><b><a href="{% url 'profile'%}">update</a></b></em> your profile before we proceed.
+                </h5>
+            </div>
+            <!-- empty div -->
+            <div class="col-md-4"></div>
+        </div>
+
+    </div>
+    {%endblock%}

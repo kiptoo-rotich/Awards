@@ -1,0 +1,26 @@
+form>label {
+    margin-top: 10px;
+}
+
+.panel {
+    margin-top: 25%;
+}
+
+.success {
+    text-align: center;
+    background-color: #cccccc;
+    border-radius: 5px;
+    padding:5%
+}
+.success>h5{
+    font-size:18px;
+    margin-top: 5%;
+}
+
+.success>h3{
+    color: green;
+}
+
+#navbar{
+    list-style: none;
+}

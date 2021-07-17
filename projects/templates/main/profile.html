@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+{%load bootstrap3%}
+{%block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <h4>{{current_user}}</h4>
+            <h5><i>{{current_user.email}}</i></h5>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            {{profile.profile_pic}}
+        </div>
+    </div>
+</div>
+{%endblock%}
