@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import (REDIRECT_FIELD_NAME, get_user_model, login as auth_login,logout as auth_logout, update_session_auth_hash)
 from .forms import ProfileUpdateForm,ProjectForm
 from django.contrib.sites.shortcuts import get_current_site
-from .models import Projects
+from .models import Projects,Profile
 
 
 def index(request):
@@ -74,8 +74,9 @@ def profile(request):
     return render(request, 'main/profile.html',context)
 
 def newProject(request):
-    user=request.user
-    form=ProjectForm()
+    current_user=request.user
+    user_profile=Profile.objects.filter(user=current_user)
+    
     if request.method=="POST":
         form=ProjectForm(request.POST,request.FILES)
         if form.is_valid():
@@ -86,10 +87,9 @@ def newProject(request):
             screen_shot=form.cleaned_data.get('screen_shot')
             project=Projects(project_title=project_title,project_about=project_about,project_description=project_description,technologies=technologies,screen_shot=screen_shot)
             project.save()
-            print("Valid form!")
-        return redirect('projects')
+        
+        return redirect('index')
     else:
         form=ProjectForm()
         context={"form":form}
-        print("Ooops!, Invalid form!")
     return render(request,'main/project.html', context)

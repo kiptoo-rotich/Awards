@@ -19,6 +19,6 @@ class Projects(models.Model):
     project_title = models.CharField(max_length=30)
     project_about = models.CharField(max_length=30)
     project_description = models.CharField(max_length=2000)
-    screen_shot=models.ImageField()
+    screen_shot=models.ImageField(upload_to='images/', default="Image")
     technologies=models.CharField(max_length=20)
-    
+

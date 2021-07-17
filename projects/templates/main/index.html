@@ -5,6 +5,7 @@
 <div class="container">
     <div class="row">
         {%for project in projects%}
+        <img src="{{project.screen_shot}}" alt="Image">
         {{project.project_description}}
         {%endfor%}
     </div>

@@ -41,6 +41,4 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model=Projects
         fields='__all__'
-        widget={
-            'technologies':forms.CheckboxSelectMultiple()
-        }
+     

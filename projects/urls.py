@@ -9,7 +9,6 @@ urlpatterns=[
     path('',views.index,name='index'),
     path('accounts/profile/',views.profile,name='profile'),
     path('logout/', views.logout, name='logout'), 
-    path('awards/projects/',views.newProject,name='projects'),
     path('new_project',views.newProject,name='new_project')
 ]
 if settings.DEBUG:
