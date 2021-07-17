@@ -20,5 +20,5 @@ class Projects(models.Model):
     project_about = models.CharField(max_length=30)
     project_description = models.CharField(max_length=2000)
     screen_shot=models.ImageField()
-    technologies=models.ManyToManyField(User)
+    technologies=models.CharField(max_length=20)
     

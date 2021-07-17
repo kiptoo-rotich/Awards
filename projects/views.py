@@ -79,10 +79,17 @@ def newProject(request):
     if request.method=="POST":
         form=ProjectForm(request.POST,request.FILES)
         if form.is_valid():
-            project=form.save(commit=False)
+            project_title=form.cleaned_data.get('project_title')
+            project_about=form.cleaned_data.get('project_about')
+            project_description=form.cleaned_data.get('project_description')
+            technologies=form.cleaned_data.get('technologies')
+            screen_shot=form.cleaned_data.get('screen_shot')
+            project=Projects(project_title=project_title,project_about=project_about,project_description=project_description,technologies=technologies,screen_shot=screen_shot)
             project.save()
-        return redirect('index')
+            print("Valid form!")
+        return redirect('projects')
     else:
         form=ProjectForm()
         context={"form":form}
-    return render(request,'main/project.html',context)
+        print("Ooops!, Invalid form!")
+    return render(request,'main/project.html', context)

@@ -5,10 +5,13 @@
 
     <div class="row">
 
-        <form action="" style="width:100%">
-            {%csrf_token%}
-            {%bootstrap_form form%}
-            <input type="submit" class="btn btn-success btn-lg" value="Post">
+        <form action="{%url 'new_project'%}" style="width:100%" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary btn-md">
+            </div>
+            <input type="hidden" name="next" value="/">
         </form>
 
     </div>
