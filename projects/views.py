@@ -80,19 +80,14 @@ def newProject(request):
     if request.method=="POST":
         form=ProjectForm(request.POST,request.FILES)
         if form.is_valid():
-            project_title=form.cleaned_data.get('project_title')
-            project_about=form.cleaned_data.get('project_about')
-            project_description=form.cleaned_data.get('project_description')
-            technologies=form.cleaned_data.get('technologies')
-            screen_shot=form.cleaned_data.get('screen_shot')
-            project=Projects(project_title=project_title,project_about=project_about,project_description=project_description,technologies=technologies,screen_shot=screen_shot)
-            project.save()
+            new_post=form.save(commit=False)
+            new_post.user=request.user
+            new_post.save()
         
-        return redirect('index')
+            return redirect('index')
     else:
         form=ProjectForm()
-        context={"form":form}
-    return render(request,'main/project.html', context)
+    return render(request,'main/project.html', {'form':form})
 
 def search_results(request):
     if 'Project' in request.GET and request.GET["Project"]:
