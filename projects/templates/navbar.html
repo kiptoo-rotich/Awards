@@ -18,8 +18,8 @@
                     </center>
                 </li>
                 <li class="dropdown" id="navbar">
-                    <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
-                        aria-expanded="false">Account
+                    <a href="#" class="dropdown-toggle btn btn-default bg-success" data-toggle="dropdown" role="button"
+                        aria-expanded="false" style="color:white;font-weight:700;">{{user}}
                     </a>
                     <ul class="dropdown-menu" role="menu" id="navbar">
                         <li>
@@ -35,7 +35,7 @@
                             <a href="/accounts/password_change">Change Password</a>
                         </li>
                         <li>
-                            <a href="/logout">Logout</a>
+                            <a href="accounts/logout">Logout</a>
                         </li>
                     </ul>
                 </li>
@@ -43,7 +43,7 @@
             </ul>
             {% else %}
             <li id="navbar">
-                <a class='btn btn-default' href="/accounts/login">Login</a>
+                <a class='btn btn-default' href="/accounts/login/">Login</a>
             </li>
 
             {% endif %}

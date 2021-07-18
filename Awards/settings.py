@@ -13,6 +13,16 @@ import os
 import django_heroku
 import dj_database_url
 from decouple import config,Csv
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+cloudinary.config( 
+  cloud_name = "dbxhvnaxj", 
+  api_key = "492558563175452", 
+  api_secret = "gF1JDdDdKmV4w4zBswn9d8eUWDM",
+  secure = True
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -142,5 +152,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
 
+# LOGOUT_REDIRECT_URL ='accounts/login'
 
 APPEND_SLASH=False

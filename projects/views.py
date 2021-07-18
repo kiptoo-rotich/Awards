@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import (REDIRECT_FIELD_NAME, get_user_model, login as auth_login,logout as auth_logout, update_session_auth_hash)
-from .forms import ProfileUpdateForm,ProjectForm
+from .forms import ProfileUpdateForm,ProjectForm,ReviewForm
 from django.contrib.sites.shortcuts import get_current_site
-from .models import Projects,Profile
+from .models import Projects,Profile,Review
 
 
 def index(request):
@@ -61,6 +61,8 @@ def logout(request, next_page=None,
 
     return render(request, 'registration/login.html', context)
 
+
+
 def profile(request):
     current_user = request.user
     if request.method =='POST':
@@ -99,3 +101,18 @@ def search_results(request):
     else:
         message="You haven't searched for any term"
         return render(request,"main/search.html",{"message":message})
+    
+def reviews(request,id):
+    reviews = Review.objects.get(id = id)
+    user = request.user
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            rate = form.save(commit=False)
+            rate.user = user
+            rate.projects = project
+            rate.save()
+            return redirect('home')
+    else:
+        form = RateForm()
+    return render(request,"main/reviews.html",{"form":form,"reviews":reviews}) 

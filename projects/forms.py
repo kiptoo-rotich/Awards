@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profile,Projects
+from .models import Profile,Projects,Review
 
 languages=[
     ('django', 'django'),
@@ -41,4 +41,8 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model=Projects
         fields='__all__'
-     
+   
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model=Review
+        fields=['reviews']

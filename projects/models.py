@@ -10,6 +10,9 @@ class Profile(models.Model):
     profile_pic = models.ImageField(upload_to='image',default='Image')
     country=models.TextField(blank=True,max_length=20)
 
+    def __str__(self):
+        return self.user__username
+    
 @receiver(post_save,sender=User)
 def update_user_profile(sender,instance,created,**kwargs):
     if created:
@@ -20,10 +23,18 @@ class Projects(models.Model):
     project_title = models.CharField(max_length=30)
     project_about = models.CharField(max_length=30)
     project_description = models.CharField(max_length=2000)
-    screen_shot = models.ImageField(upload_to='image',default='Image')
+    screen_shot = CloudinaryField('image' ,default='Image')
     technologies=models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.project_title
+    
     @classmethod
     def search(cls,search_term):
         projects=cls.objects.filter(project_title__icontains=search_term)
         return projects
+
+class Review(models.Model):
+    reviews = models.TextField(max_length=200)
+    user = models.ForeignKey('Projects', blank=True,on_delete=models.CASCADE)
+    

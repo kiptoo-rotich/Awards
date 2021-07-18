@@ -4,11 +4,17 @@
 {{block.super}}
 <div class="container">
     <div class="row">
-        {%for project in projects%}
-        {{project.project_title}}<br>
-        {{project.project_topic}}<br>
-        {{project.project_description}}<br>
-        {%endfor%}
+        <div style="width:100%; padding:10px; border-radius:5px;margin-bottom:10px" class="bg-light">
+            {%for project in projects%}
+            <h3>{{project.project_title}}</h3>
+            <img src="{{project.screen_shot.url}}" alt="Image" style="width:100%">
+            <h4>{{project.project_topic}}</h4>
+            <p>{{project.project_description}}</p>
+            <i><a href="{%url 'reviews' project.id%}">Reviews</a></i>
+            <hr>
+            {%endfor%}
+            
+        </div>
         <hr>
     </div>
 </div>
