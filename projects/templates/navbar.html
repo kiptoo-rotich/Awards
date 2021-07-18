@@ -5,37 +5,38 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="row collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="row collapse navbar-collapse" id="navbarSupportedContent" style="overflow-x:hidden;">
         <div class="col-sm-12 col-md-12 d-flex flex-row-reverse" style="flex-direction:row;">
             {% if user.is_authenticated %}
-            <ul id="navbar" style="display:flex;flex-direction:row;">
+            <ul id="navbar" style="display:flex;flex-direction:row;margin:20px">
                 <li>
                     <center>
                         <form class="form-inline" action="{% url 'search'%}">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="Project">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                                name="Project">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
                     </center>
                 </li>
-                <li class="dropdown" id="navbar">
+                <li class="dropdown" id="navbar" style="margin-left:20px;">
                     <a href="#" class="dropdown-toggle btn btn-default bg-success" data-toggle="dropdown" role="button"
-                        aria-expanded="false" style="color:white;font-weight:700;">{{user}}
+                        aria-expanded="false" style="color:white;font-weight:700;"><img src="{{user.profile.url}}" alt="">{{user}}
                     </a>
-                    <ul class="dropdown-menu" role="menu" id="navbar">
-                        <li>
-                            <a href="{%url 'index'%}">Home</a>
+                    <ul class="dropdown-menu" role="menu" id="navbar" style="margin-right:30px">
+                        <li><a href="{%url 'index'%}"></a><img src="../static/images/Home.png" alt="Home">
+                            Home</a>
                         </li>
-                        <li>
-                            <a href="{%url 'profile'%}">Profile</a>
+                        <li><a href="{%url 'profile'%}">
+                            <img src="../static/images/account.png" alt="Account" width="15px">Profile</a>
                         </li>
-                        <li>
-                            <a href="{%url 'new_project'%}">Add project</a>
+                        <li><a href="{%url 'new_project'%}">
+                            <img src="../static/images/Add.png" alt="" width="15px">Add project</a>
                         </li>
-                        <li>
-                            <a href="/accounts/password_change">Change Password</a>
+                        <li><a href="/accounts/password_change">
+                            <img src="../static/images/password_change.png" alt="Change" width="15px">Change Password</a>
                         </li>
-                        <li>
-                            <a href="accounts/logout">Logout</a>
+                        <li><a href="accounts/logout">
+                            <img src="../static/images/Signout.png" alt="Signout" width="15px">Logout</a>
                         </li>
                     </ul>
                 </li>

@@ -24,3 +24,7 @@ form>label {
 #navbar{
     list-style: none;
 }
+
+#navbar>li{
+    padding:3px;
+}

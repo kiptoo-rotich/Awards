@@ -116,3 +116,15 @@ def reviews(request,id):
     else:
         form = RateForm()
     return render(request,"main/reviews.html",{"form":form,"reviews":reviews}) 
+
+def updateprofile(request):
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Your Profile has been updated!')
+            return redirect('profile')
+    else:
+        form = ProfileUpdateForm(instance=request.user)
+
+    return render(request, 'main/updateprofile.html',{'form': form} )
