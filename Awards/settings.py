@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'projects',
     'bootstrap3',
     'cloudinary',
+    'rest_framework.authtoken',
     'star_ratings',
     'rest_framework',
     'django.contrib.admin',
@@ -163,3 +164,10 @@ LOGIN_REDIRECT_URL ='/'
 STAR_RATINGS_ANONYMOUS = False
 STAR_RATINGS_STAR_HEIGHT = 15
 STAR_RATINGS_STAR_WIDTH= 15
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
