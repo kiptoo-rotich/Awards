@@ -7,7 +7,7 @@ from cloudinary.models import CloudinaryField
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     bio=models.TextField(blank=True,max_length=400)
-    profile_pic = models.ImageField(upload_to='image',default='Image')
+    profile_pic = CloudinaryField('image',default='Image')
     country=models.TextField(blank=True,max_length=20)
 
     def __str__(self):
@@ -36,5 +36,5 @@ class Projects(models.Model):
 
 class Review(models.Model):
     reviews = models.TextField(max_length=200)
-    user = models.ForeignKey('Projects', blank=True,on_delete=models.CASCADE)
+    project_id = models.ForeignKey('Projects', blank=True,on_delete=models.CASCADE)
     

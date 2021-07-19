@@ -64,6 +64,7 @@ def logout(request, next_page=None,
 
 
 def profile(request):
+    profile_data = Profile.objects.all()
     current_user = request.user
     if request.method =='POST':
         profile=ProfileUpdateForm(request.POST,request.FILES,instance=current_user.profile)
@@ -72,7 +73,7 @@ def profile(request):
             return redirect('profile')
     else:
         profile=ProfileUpdateForm(instance=request.user)
-    context={"profile":profile,"current_user": current_user}
+    context={"profile":profile,"current_user": current_user,"profile_data":profile_data}
     return render(request, 'main/profile.html',context)
 
 def newProject(request):
@@ -103,18 +104,19 @@ def search_results(request):
         return render(request,"main/search.html",{"message":message})
     
 def reviews(request,id):
-    reviews = Review.objects.get(id = id)
+    # reviews = Review.objects.get(projecid = id).all()
+    project=Projects.objects.get(id=id)
     user = request.user
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
-            rate = form.save(commit=False)
-            rate.user = user
-            rate.projects = project
-            rate.save()
+            review = form.save(commit=False)
+            review.user = user
+            review.projects = project
+            review.save()
             return redirect('home')
     else:
-        form = RateForm()
+        form = ReviewForm()
     return render(request,"main/reviews.html",{"form":form,"reviews":reviews}) 
 
 def updateprofile(request):
@@ -122,9 +124,8 @@ def updateprofile(request):
         form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
         if form.is_valid():
             form.save()
-            messages.success(request,'Your Profile has been updated!')
             return redirect('profile')
     else:
         form = ProfileUpdateForm(instance=request.user)
 
-    return render(request, 'main/updateprofile.html',{'form': form} )
+    return render(request, 'main/updateprofile.html',{"form": form} )

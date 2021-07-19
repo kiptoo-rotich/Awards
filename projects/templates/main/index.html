@@ -1,19 +1,21 @@
 {%extends 'base.html'%}
 {%load bootstrap3%}
+{%load ratings%}
 {%block content%}
 {{block.super}}
 <div class="container">
     <div class="row">
-        <div style="width:100%; padding:10px; border-radius:5px;margin-bottom:10px" class="bg-light">
+        <div style="width:100%; padding:15px; border-radius:5px;margin-bottom:10px" class="bg-light">
             {%for project in projects%}
-            <h3>{{project.project_title}}</h3>
+            <h2 style="text-decoration:underline;">{{project.project_title}}</h2>
             <img src="{{project.screen_shot.url}}" alt="Image" style="width:100%">
             <h4>{{project.project_topic}}</h4>
             <p>{{project.project_description}}</p>
+            {%ratings project%}
             <i><a href="{%url 'reviews' project.id%}">Reviews</a></i>
             <hr>
             {%endfor%}
-            
+
         </div>
         <hr>
     </div>
