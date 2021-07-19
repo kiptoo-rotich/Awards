@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth import (REDIRECT_FIELD_NAME, get_user_model, login as auth_login,logout as auth_logout, update_session_auth_hash)
 from .forms import ProfileUpdateForm,ProjectForm,ReviewForm
 from django.contrib.sites.shortcuts import get_current_site
@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from .serializer import ProjectSerializer
 from django.contrib.auth.decorators import login_required
 from rest_framework import status
+from .permissions import IsAdminOrReadOnly
 
 
 def index(request):
@@ -128,7 +129,9 @@ def reviews(request,id):
     return render(request,"main/reviews.html",{"form":form,"reviews":reviews,"project":project}) 
 
 @login_required(login_url='/accounts/login/')
-def updateprofile(request):
+def updateprofile(request,id):
+    user_data=get_object_or_404(Profile,id=id)
+    form=profileForm(request.POST or None, request.FILES,instance=user_data)
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
         if form.is_valid():
@@ -137,7 +140,7 @@ def updateprofile(request):
     else:
         form = ProfileUpdateForm(instance=request.user)
 
-    return render(request, 'main/updateprofile.html',{"form": form} )
+    return render(request, 'main/updateprofile.html',{"form": form,"user_data":user_data} )
 
 class ProjectsList(APIView):
     def get(self, request,format=None):
@@ -145,9 +148,22 @@ class ProjectsList(APIView):
         serializers=ProjectSerializer(all_projects,many=True)
         return Response(serializers.data)
     
+    permission_classes = (IsAdminOrReadOnly,)
     def post (self, request,format=None):
         serializers=ProjectSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data,status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    permission_classes = (IsAdminOrReadOnly,)
+    def get_project(self,pk):
+        try:
+            return Projects.objects.get(pk=pk)
+        except Projects.DoesNotExist:
+            return Http404
+        
+    def get(self,request,pk,format=None):
+        project=self.get_project(pk)
+        serializers=ProjectSerializer(project)
+        return Response(serializers.data)

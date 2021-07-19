@@ -16,7 +16,8 @@ urlpatterns=[
     path('update/',views.updateprofile,name = 'updateprofile'),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
     path('api/projects',views.ProjectsList.as_view()),
-    path('api-token-auth/', obtain_auth_token)
+    path('api-token-auth/', obtain_auth_token),
+    path('api/projects/project-id/(?P<pk>[0-9]+)',views.ProjectsList.as_view()),
 
 ]
 if settings.DEBUG:

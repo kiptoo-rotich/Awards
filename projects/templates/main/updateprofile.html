@@ -6,7 +6,7 @@
     <div class="row">
         <form method='POST' enctype="multipart/form-data">
             {%csrf_token%}
-            {{ form}}
+            {{ form|cripsy }}
             <button type='submit'>Update</button>
         </form>
     </div>

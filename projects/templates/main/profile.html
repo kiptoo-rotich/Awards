@@ -4,10 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4 col-md-4 col-lg-4">
-            {%if empty %}
-            <p>Profile not available</p>
+            {%if user_data.profile_pic %}
             {%else%}
-            <img src="{{profile_data.profile_pic.url}}" alt="Profile">
+            <img src="https://img.icons8.com/ios-filled/50/000000/name.png" width="100px"/>
             {%endif%}
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
