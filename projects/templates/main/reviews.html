@@ -4,22 +4,27 @@
 {%block content%}
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 col-md-5 col-lg-5">
+        <div class="col-md-7 col-lg-7">
+            <img src="{{project.screen_shot.url}}" alt="Image" width="100%">
+            <h3>Project Title: {{project.project_title}}</h3>
+            <h3>About: {{project.project_about}}</h3>
+            <p>{{project.project_description}}</p>
+            <p>Technologies used: {{project.technologies}}</p>
+        </div>
+        <div class="col-md-5 col-lg-5">
             <form class="form" action="" method="post" novalidate>
                 {% csrf_token %}
-                {% bootstrap_form form %}
+                {% bootstrap_form form%}
                 <div class="row pl-5">
-                    <button type="submit" class="btn btn-sm btn-outline-primary"
-                        style="margin-top:14px; margin-left:-10px">Submit</button>
+                    <button type="submit" class="btn btn-md btn-outline-primary" style="margin-bottom:5%"
+                        >Submit</button>
                 </div>
             </form>
+            <div>
+                {{reviews.reviews}}
+            </div>
         </div>
-        <div class="col-md-7 col-lg-7 card" style="margin:20px">
-            {%for review in reviews%}
-            <p>{{review.image.title}}</p>
-            <p>{{review.review}} posted {{review.pub_date|timesince}} ago</p>
-            {%endfor%}
-        </div>
+        
     </div>
 </div>
 

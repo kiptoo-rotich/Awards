@@ -107,20 +107,19 @@ def search_results(request):
         return render(request,"main/search.html",{"message":message})
     
 def reviews(request,id):
-    reviews = Review.objects.filter(project_id = id)
     project=Projects.objects.get(id=id)
+    reviews=Review.objects.filter(id=id)
     user = request.user
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
-            review.reviews=reviews
             review.project = project
             review.save()
             return redirect('home')
     else:
         form = ReviewForm()
-    return render(request,"main/reviews.html",{"form":form,"reviews":reviews}) 
+    return render(request,"main/reviews.html",{"form":form,"reviews":reviews,"project":project}) 
 
 def updateprofile(request):
     if request.method == 'POST':

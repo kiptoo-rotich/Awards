@@ -5,15 +5,15 @@
 {{block.super}}
 <div class="container">
     <div class="row">
-        <div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
             {%for project in projects%}
-            <div class="bg-light"  style="width:100%; padding:15px; border-radius:5px;margin-bottom:10px; border:0.3px solid gray">
+            <div class="bg-light"  style="width:100%; padding:15px; border-radius:5px;margin-bottom:10px; border:0.3px solid gray;">
                 <h2 style="text-decoration:underline;">{{project.project_title}}</h2>
                 <img src="{{project.screen_shot.url}}" alt="Image" style="width:100%">
-                <h4>{{project.project_topic}}</h4>
-                <p>{{project.project_description}}</p>
+                <h4>About: {{project.project_about}}</h4>
                 {%ratings project%}
                 <p><i><a href="{%url 'reviews' project.id%}">Reviews</a></i></p>
+                <p>Posted {{project.posted_on|timesince}}</p>
             </div>
 
             <hr class="hr">
