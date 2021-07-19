@@ -6,6 +6,8 @@ from .models import Projects,Profile,Review
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProjectSerializer
+from django.contrib.auth.decorators import login_required
+from rest_framework import status
 
 
 def index(request):
@@ -26,6 +28,7 @@ def registration(request):
         form=SignupForm()
     return render(request,'django_registration/registration.html',{'form':form})
 
+@login_required(login_url='/accounts/login/')
 def logout(request, next_page=None,
            template_name='registration/logged_out.html',
            redirect_field_name=REDIRECT_FIELD_NAME,
@@ -54,7 +57,7 @@ def logout(request, next_page=None,
     context = {
         'site': current_site,
         'site_name': current_site.name,
-        'title':('Logged out')
+        'p':('Logged out')
     }
     if extra_context is not None:
         context.update(extra_context)
@@ -62,10 +65,10 @@ def logout(request, next_page=None,
     if current_app is not None:
         request.current_app = current_app
 
-    return render(request, 'registration/login.html', context)
+    return render(request, 'main/logout.html', context)
 
 
-
+@login_required(login_url='/accounts/login/')
 def profile(request):
     profile_data = Profile.objects.all()
     current_user = request.user
@@ -79,6 +82,7 @@ def profile(request):
     context={"profile":profile,"current_user": current_user,"profile_data":profile_data}
     return render(request, 'main/profile.html',context)
 
+@login_required(login_url='/accounts/login/')
 def newProject(request):
     current_user=request.user
     user_profile=Profile.objects.filter(user=current_user)
@@ -95,6 +99,7 @@ def newProject(request):
         form=ProjectForm()
     return render(request,'main/project.html', {'form':form})
 
+@login_required(login_url='/accounts/login/')
 def search_results(request):
     if 'Project' in request.GET and request.GET["Project"]:
         search_term=request.GET.get('Project')
@@ -106,6 +111,7 @@ def search_results(request):
         message="You haven't searched for any term"
         return render(request,"main/search.html",{"message":message})
     
+@login_required(login_url='/accounts/login/')
 def reviews(request,id):
     project=Projects.objects.get(id=id)
     reviews=Review.objects.filter(id=id)
@@ -121,6 +127,7 @@ def reviews(request,id):
         form = ReviewForm()
     return render(request,"main/reviews.html",{"form":form,"reviews":reviews,"project":project}) 
 
+@login_required(login_url='/accounts/login/')
 def updateprofile(request):
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
@@ -137,3 +144,10 @@ class ProjectsList(APIView):
         all_projects = Projects.objects.all()
         serializers=ProjectSerializer(all_projects,many=True)
         return Response(serializers.data)
+    
+    def post (self, request,format=None):
+        serializers=ProjectSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
