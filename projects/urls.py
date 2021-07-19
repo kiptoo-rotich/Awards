@@ -14,7 +14,7 @@ urlpatterns=[
     path('reviews/<id>/',views.reviews,name = 'reviews'),
     path('update/',views.updateprofile,name = 'updateprofile'),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
-
+    path('api/projects',views.ProjectsList.as_view())
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

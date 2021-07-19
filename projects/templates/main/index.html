@@ -12,7 +12,7 @@
             <h4>{{project.project_topic}}</h4>
             <p>{{project.project_description}}</p>
             {%ratings project%}
-            <i><a href="{%url 'reviews' project.id%}">Reviews</a></i>
+            <p><i><a href="{%url 'reviews' project.id%}">Reviews</a></i></p>
             <hr>
             {%endfor%}
 

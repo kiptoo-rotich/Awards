@@ -3,6 +3,9 @@ from django.contrib.auth import (REDIRECT_FIELD_NAME, get_user_model, login as a
 from .forms import ProfileUpdateForm,ProjectForm,ReviewForm
 from django.contrib.sites.shortcuts import get_current_site
 from .models import Projects,Profile,Review
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProjectSerializer
 
 
 def index(request):
@@ -104,7 +107,7 @@ def search_results(request):
         return render(request,"main/search.html",{"message":message})
     
 def reviews(request,id):
-    # reviews = Review.objects.get(projecid = id).all()
+    reviews = Review.objects.filter(project_id = id)
     project=Projects.objects.get(id=id)
     user = request.user
     if request.method == 'POST':
@@ -112,7 +115,8 @@ def reviews(request,id):
         if form.is_valid():
             review = form.save(commit=False)
             review.user = user
-            review.projects = project
+            review.reviews=reviews
+            review.project = project
             review.save()
             return redirect('home')
     else:
@@ -129,3 +133,9 @@ def updateprofile(request):
         form = ProfileUpdateForm(instance=request.user)
 
     return render(request, 'main/updateprofile.html',{"form": form} )
+
+class ProjectsList(APIView):
+    def get(self, request,format=None):
+        all_projects = Projects.objects.all()
+        serializers=ProjectSerializer(all_projects,many=True)
+        return Response(serializers.data)
