@@ -1,11 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="width:100%; height:30px;border-bottom:1px solid gray;">
     <a class="navbar-brand" href="/">Awards</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="row collapse navbar-collapse" id="navbarSupportedContent" style="overflow-x:hidden;">
+    <div class="row collapse navbar-collapse" id="navbarSupportedContent">
         <div class="col-sm-12 col-md-12 d-flex flex-row-reverse" style="flex-direction:row;">
             {% if user.is_authenticated %}
             <ul id="navbar" style="display:flex;flex-direction:row;margin:20px">
@@ -18,33 +18,41 @@
                         </form>
                     </center>
                 </li>
-                <li class="dropdown" id="navbar" style="margin-left:20px;">
+                <li class="dropdown" id="navbar" style="margin-left:20px;margin-right:30px">
                     <a href="#" class="dropdown-toggle btn btn-default bg-success" data-toggle="dropdown" role="button"
-                        aria-expanded="false" style="color:white;font-weight:700;"><img src="{{user.profile.url}}" alt="">{{user}}
+                        aria-expanded="false" style="color:white;font-weight:700;"><img src="{{user.profile.url}}"
+                            alt="">{{user}}
                     </a>
                     <ul class="dropdown-menu" role="menu" id="navbar" style="margin-right:30px">
-                        <li><a href="{%url 'index'%}"><img src="../static/images/Home.png" alt="Home">
-                            Home</a>
+                        <li><a href="{%url 'index'%}"><img
+                                    src="https://img.icons8.com/material-outlined/24/000000/home--v2.png" width="20" height="20" style="margin-right:5px"/>
+                                Home</a>
                         </li>
                         <li><a href="{%url 'profile'%}">
-                            <img src="../static/images/account.png" alt="Account" width="15px">Profile</a>
+                                <img src="https://img.icons8.com/ios-filled/50/000000/user.png" width="20" height="20" style="margin-right:5px"/>Profile</a>
                         </li>
                         <li><a href="{%url 'new_project'%}">
-                            <img src="../static/images/Add.png" alt="" width="15px">Add project</a>
+                                <img src="https://img.icons8.com/material-outlined/24/000000/add.png" width="20" height="20" style="margin-right:5px"/>Add project</a>
                         </li>
                         <li><a href="/accounts/password_change">
-                            <img src="../static/images/password_change.png" alt="Change" width="15px">Change Password</a>
+                                <img src="https://img.icons8.com/ios/50/000000/re-enter-pincode.png" width="20" height="20" style="margin-right:5px"/>Change
+                                Password</a>
                         </li>
                         <li><a href="accounts/logout">
-                            <img src="../static/images/Signout.png" alt="Signout" width="15px">Logout</a>
+                                <img src="https://img.icons8.com/ios-filled/50/000000/logout-rounded.png" width="20" height="20" style="margin-right:5px"/>Logout</a>
                         </li>
                     </ul>
                 </li>
 
             </ul>
             {% else %}
-            <li id="navbar">
-                <a class='btn btn-default' href="/accounts/login/">Login</a>
+            <li id="navbar" style="margin:0px 10px 0px 10px;font-weight:600">
+                <a class='btn btn-info' href="/admin/"><img src="../static/images/admin.png" alt="Admin"
+                        style="width:20px;margin:0px 10px 0px 10px">Admin</a>
+            </li>
+            <li id="navbar" style="font-weight:600">
+                <a class='btn btn-info' href="/accounts/login/"><img src="../static/images/icons8-login.gif" alt=""
+                        style="width:20px;margin-right:10px">Login</a>
             </li>
 
             {% endif %}

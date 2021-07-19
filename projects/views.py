@@ -114,7 +114,6 @@ def reviews(request,id):
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
-            review.user = user
             review.reviews=reviews
             review.project = project
             review.save()

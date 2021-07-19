@@ -37,4 +37,3 @@ class Projects(models.Model):
 class Review(models.Model):
     reviews = models.TextField(max_length=200)
     project_id = models.ForeignKey('Projects', blank=True,on_delete=models.CASCADE)
-    
