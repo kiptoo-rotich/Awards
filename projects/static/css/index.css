@@ -5,6 +5,7 @@ form>label {
 body {
     overflow-x: hidden;
 }
+
 .panel {
     margin-top: 25%;
 }
@@ -33,7 +34,7 @@ body {
     padding: 3px;
 }
 
-h2 {
+h2, h3 {
     font-family: 'Bree Serif', serif;
 }
 
@@ -46,6 +47,13 @@ p {
     font-size: 18px
 }
 
-.hr{
+.hr {
     border: 0.7px solid gray;
+}
+
+.award {
+    font-family: 'Rock Salt', cursive;
+    font-size: 24px;
+    margin-left: 10%;
+    color: blue;
 }

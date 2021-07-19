@@ -12,7 +12,7 @@ class Profile(models.Model):
     country=models.TextField(blank=True,max_length=20)
 
     def __str__(self):
-        return self.user__username
+        return self.bio
     
 @receiver(post_save,sender=User)
 def update_user_profile(sender,instance,created,**kwargs):
@@ -39,4 +39,5 @@ class Projects(models.Model):
 class Review(models.Model):
     reviews = models.TextField(max_length=200)
     project_id = models.ForeignKey(Projects, on_delete=models.CASCADE)
+    user= models.ForeignKey(User, on_delete=models.CASCADE)
     posted_on = models.DateTimeField(auto_now_add=True, null=True)

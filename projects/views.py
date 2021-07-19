@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth import (REDIRECT_FIELD_NAME, get_user_model, login as auth_login,logout as auth_logout, update_session_auth_hash)
-from .forms import ProfileUpdateForm,ProjectForm,ReviewForm
+from .forms import ProfileUpdateForm,ProjectForm,ReviewForm,ProfileForm
 from django.contrib.sites.shortcuts import get_current_site
 from .models import Projects,Profile,Review
 from rest_framework.response import Response
@@ -9,6 +9,7 @@ from .serializer import ProjectSerializer
 from django.contrib.auth.decorators import login_required
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
+from django.http import HttpResponseRedirect
 
 
 def index(request):
@@ -70,8 +71,8 @@ def logout(request, next_page=None,
 
 
 @login_required(login_url='/accounts/login/')
-def profile(request):
-    profile_data = Profile.objects.all()
+def profile(request,id):
+    profile_data = Profile.objects.get(id=id)
     current_user = request.user
     if request.method =='POST':
         profile=ProfileUpdateForm(request.POST,request.FILES,instance=current_user.profile)
@@ -115,32 +116,38 @@ def search_results(request):
 @login_required(login_url='/accounts/login/')
 def reviews(request,id):
     project=Projects.objects.get(id=id)
-    reviews=Review.objects.filter(id=id)
+    reviews=Review.objects.filter(project_id=id)
     user = request.user
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
-            review.project = project
+            review.project_id = project
             review.save()
-            return redirect('home')
+            return HttpResponseRedirect(request.path_info)
     else:
         form = ReviewForm()
+    print(reviews)
     return render(request,"main/reviews.html",{"form":form,"reviews":reviews,"project":project}) 
 
 @login_required(login_url='/accounts/login/')
-def updateprofile(request,id):
-    user_data=get_object_or_404(Profile,id=id)
-    form=profileForm(request.POST or None, request.FILES,instance=user_data)
+def updateprofile(request):
+    current_user = request.user
+    profile=Profile.objects.all()
     if request.method == 'POST':
-        form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
-        if form.is_valid():
-            form.save()
+        form = ProfileUpdateForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile) 
+
+        if form.is_valid() and profile_form.is_valid():
+            user_form = form.save()
+            custom_form = profile_form.save(False)
+            custom_form.user = user_form
+            custom_form.save()
             return redirect('profile')
     else:
         form = ProfileUpdateForm(instance=request.user)
 
-    return render(request, 'main/updateprofile.html',{"form": form,"user_data":user_data} )
+    return render(request, 'main/updateprofile.html',{"form": form} )
 
 class ProjectsList(APIView):
     def get(self, request,format=None):

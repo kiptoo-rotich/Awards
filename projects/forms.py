@@ -31,6 +31,11 @@ technologies=[
 
 ]
 
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['user']
+
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model=Profile
