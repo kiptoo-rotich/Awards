@@ -12,9 +12,16 @@
     <div class="row">
         {%if results%}
         {%for result in results%}
-        <div class="col-sm-6 col-md-3">
+        <div class="col-md-2 col-lg-2"></div>
+        <div class="col-xm-12 col-sm-12 col-md-8">
             <h1>{{result.project_title}}</h1>
-        </div><br>
+            <img src="{{result.screen_shot.url}}" alt="Screen shot" style="width:100%">
+            <h2>{{result.project_about}}</h2>
+            <h4>{{result.project_description}}</h4>
+            <i>{{result.posted_on}}</i>
+        </div>
+        <div class="col-md-2 col-lg-2"></div>
+        <br>
         {%endfor%}
         {%endif%}
     </div>

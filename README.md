@@ -3,11 +3,17 @@
 #### Author: [Kiptoo Rotich](https://github.com/kiptoo-rotich)
 
 ## Screenshot
-### Home page
-![IP](https://user-images.githubusercontent.com/48821300/124427808-8f984d00-dd74-11eb-816b-7dad48e0b77b.png)
+### Landing page
+![home page](https://user-images.githubusercontent.com/48821300/126333113-d08e945f-921b-4242-acf8-ca82375bc6d1.png)
 
-### Single photo
-![IP1](https://user-images.githubusercontent.com/48821300/124479847-57623000-ddaf-11eb-8ac3-dd125776d5b6.png)
+### Profile
+![profile](https://user-images.githubusercontent.com/48821300/126333273-618dfb3e-28e7-48f9-a4b5-ecff4f093836.png)
+
+### Reviews
+![reviews](https://user-images.githubusercontent.com/48821300/126333371-97b5957b-c4b2-4d1f-b50a-d5657364df8b.png)
+
+### Search results
+![search](https://user-images.githubusercontent.com/48821300/126333460-69166654-932b-47a9-8fc8-f8413c56f655.png)
 
 
 ## Description
