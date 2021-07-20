@@ -156,7 +156,6 @@ class ProjectsList(APIView):
         serializers=ProjectSerializer(all_projects,many=True)
         return Response(serializers.data)
     
-    permission_classes = (IsAdminOrReadOnly,)
     def post (self, request,format=None):
         serializers=ProjectSerializer(data=request.data)
         if serializers.is_valid():
@@ -164,7 +163,6 @@ class ProjectsList(APIView):
             return Response(serializers.data,status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    permission_classes = (IsAdminOrReadOnly,)
     def get_project(self,pk):
         try:
             return Projects.objects.get(pk=pk)
