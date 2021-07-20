@@ -147,7 +147,7 @@ def updateprofile(request):
     else:
         form = ProfileUpdateForm(instance=request.user)
 
-    return render(request, 'main/updateprofile.html',{"form": form} )
+    return render(request, 'main/updateprofile.html',{"form": form,"profile_form":profile_form} )
 
 class ProjectsList(APIView):
     def get(self, request,format=None):

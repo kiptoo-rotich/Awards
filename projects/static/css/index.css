@@ -12,7 +12,7 @@ body {
 
 .success {
     text-align: center;
-    background-color: #cccccc;
+    background-color: #42ba96;
     border-radius: 5px;
     padding: 5%
 }
@@ -23,7 +23,7 @@ body {
 }
 
 .success>h3 {
-    color: green;
+    color: white;
 }
 
 #navbar {
