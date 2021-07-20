@@ -123,6 +123,7 @@ def reviews(request,id):
         if form.is_valid():
             review = form.save(commit=False)
             review.project_id = project
+            review.user=user
             review.save()
             return HttpResponseRedirect(request.path_info)
     else:

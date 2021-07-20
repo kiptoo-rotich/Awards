@@ -7,9 +7,12 @@ import datetime as dt
 
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
-    bio=models.TextField(blank=True,max_length=400)
+    bio=models.CharField(blank=True,max_length=400)
     profile_pic = CloudinaryField('image',default='Image')
-    country=models.TextField(blank=True,max_length=20)
+    country=models.CharField(blank=True,max_length=20)
+    company=models.CharField(blank=True,max_length=20,null=True)
+    portfolio_link=models.CharField(blank=True,max_length=50,null=True)
+    phone_number=models.CharField(max_length=13)
 
     def __str__(self):
         return self.bio
@@ -28,6 +31,9 @@ class Projects(models.Model):
     technologies=models.CharField(max_length=200)
     posted_on = models.DateTimeField(auto_now_add=True, null=True)
 
+    class Meta:
+        ordering=['-posted_on']
+
     def __str__(self):
         return self.project_title
     
@@ -41,3 +47,6 @@ class Review(models.Model):
     project_id = models.ForeignKey(Projects, on_delete=models.CASCADE)
     user= models.ForeignKey(User, on_delete=models.CASCADE)
     posted_on = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        ordering=['-posted_on']

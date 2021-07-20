@@ -39,7 +39,7 @@ class ProfileForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model=Profile
-        fields=['profile_pic','bio','country']
+        fields=['profile_pic','bio','company','portfolio_link','phone_number']
         
 class ProjectForm(forms.ModelForm):
  
