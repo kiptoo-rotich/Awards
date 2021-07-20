@@ -10,7 +10,7 @@
             <div class="bg-light"  style="width:100%; padding:15px; border-radius:5px;margin-bottom:10px; border:0.3px solid gray;">
                 <h2 style="text-decoration:underline;">{{project.project_title}}</h2>
                 <img src="{{project.screen_shot.url}}" alt="Image" style="width:100%">
-                <h4>About: {{project.project_about}}</h4>
+                <h3>About: {{project.project_about}}</h3>
                 {%ratings project%}
                 <p><i><a href="{%url 'reviews' project.id%}">Reviews</a></i></p>
                 <p>Posted {{project.posted_on|timesince}}</p>

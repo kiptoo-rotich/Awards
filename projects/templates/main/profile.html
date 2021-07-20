@@ -4,18 +4,16 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4 col-md-4 col-lg-4">
-            {%if user_data.profile_pic %}
-            <img src="https://img.icons8.com/ios-filled/50/000000/name.png" width="100px" />
-
+            {%if profile_data.profile_pic.is_empty%}
+            <img src="{{profile_data.profile_pic.url}}" alt="Image" width="100%">
             {%else%}
-            <img src="{{profile_data.profile_pic.url}}" alt="Image">
-
+            <img src="../../static/images/avatar1.png" width="250px" />
             {%endif%}
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
-            <h4>{{current_user}}</h4>
-            <h5><i>{{current_user.email}}</i></h5>
-            <p>{{profile_data.bio}}</p>
+            <h4>Username: {{current_user}}</h4>
+            <h5><i>Email: {{current_user.email}}</i></h5>
+            <p>Bio: {{profile_data.bio}}</p>
             <a href="{%url 'updateprofile'%}"><button class="btn btn-md btn-info">Edit Profile</button></a>
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
