@@ -8,7 +8,7 @@
     <div class="row collapse navbar-collapse" id="navbarSupportedContent">
         <div class="col-sm-12 col-md-12 d-flex flex-row-reverse" style="flex-direction:row;">
             {% if user.is_authenticated %}
-            <ul id="navbar" style="display:flex;flex-direction:row;margin:20px">
+            <ul id="navbar" style="display:flex;flex-direction:row;margin:10px">
                 <li>
                     <center>
                         <form class="form-inline" action="{% url 'search'%}">
@@ -18,7 +18,7 @@
                         </form>
                     </center>
                 </li>
-                <li class="dropdown" id="navbar" style="margin-left:20px;margin-right:30px">
+                <li class="dropdown" id="navbar" style="margin-left:20px;margin-right:10px">
                     <a href="#" class="dropdown-toggle btn btn-default bg-success" data-toggle="dropdown" role="button"
                         aria-expanded="false" style="color:white;font-weight:700;"><img src="{{user.profile.url}}"
                             alt="">{{user}}
@@ -47,7 +47,7 @@
             </ul>
             {% else %}
             <li id="navbar" style="margin:0px 10px 0px 10px;font-weight:600">
-                <a class='btn btn-info' href="/admin/"><img src="../static/images/admin.png" alt="Admin"
+                <a class='btn btn-info' href="/admin/"><img src="https://img.icons8.com/color/48/000000/admin-settings-male.png" />
                         style="width:20px;margin:0px 10px 0px 10px">Admin</a>
             </li>
             <li id="navbar" style="font-weight:600">
