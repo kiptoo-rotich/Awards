@@ -57,3 +57,13 @@ p {
     margin-left: 10%;
     color: blue;
 }
+
+.mediaa {
+    padding-top: 3%;
+}
+
+@media screen and (max-width: 720px) {
+    .mediaa {
+        padding-top: 10%;
+    }
+}
