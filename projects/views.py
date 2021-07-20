@@ -128,7 +128,6 @@ def reviews(request,id):
             return HttpResponseRedirect(request.path_info)
     else:
         form = ReviewForm()
-    print(reviews)
     return render(request,"main/reviews.html",{"form":form,"reviews":reviews,"project":project}) 
 
 @login_required(login_url='/accounts/login/')

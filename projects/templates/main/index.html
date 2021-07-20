@@ -12,7 +12,7 @@
                 <img src="{{project.screen_shot.url}}" alt="Image" style="width:100%">
                 <h3>About: {{project.project_about}}</h3>
                 {%ratings project%}
-                <p><i><a href="{%url 'reviews' project.id%}">Reviews</a></i></p>
+                <p><i><a href="{%url 'reviews' project.id%}">{{project.reviews.count}} Reviews</a></i></p>
                 <p>Posted {{project.posted_on|timesince}}</p>
             </div>
 
