@@ -5,9 +5,11 @@
 {{block.super}}
 <div class="container">
     <div class="row mediaa">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-            {%for project in projects%}
-            <div class="bg-light"  style="width:100%; padding:15px; border-radius:5px;margin-bottom:10px; border:0.3px solid gray;">
+        {%for project in projects%}
+
+        <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="bg-light"
+                style="width:100%; padding:15px; border-radius:5px;margin-bottom:10px; border:0.3px solid gray;">
                 <h2 style="text-decoration:underline;">{{project.project_title}}</h2>
                 <img src="{{project.screen_shot.url}}" alt="Image" style="width:100%">
                 <h3>About: {{project.project_about}}</h3>
@@ -17,9 +19,10 @@
             </div>
 
             <hr class="hr">
-            {%endfor%}
 
         </div>
+        {%endfor%}
+
         <hr>
     </div>
 </div>

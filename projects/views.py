@@ -161,14 +161,3 @@ class ProjectsList(APIView):
             serializers.save()
             return Response(serializers.data,status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def get_project(self,pk):
-        try:
-            return Projects.objects.get(pk=pk)
-        except Projects.DoesNotExist:
-            return Http404
-        
-    def get(self,request,pk,format=None):
-        project=self.get_project(pk)
-        serializers=ProjectSerializer(project)
-        return Response(serializers.data)
