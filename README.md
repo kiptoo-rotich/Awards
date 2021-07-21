@@ -40,7 +40,9 @@ As a user of the web application you will be able to:
 * Add data from admin dashboard
 
 ## End points
-`https://awards27.herokuapp.com/api/projects/`
+```bash
+https://awards27.herokuapp.com/api/projects/
+```
 
 ## Getting started
 
